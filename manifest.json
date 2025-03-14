@@ -9,24 +9,18 @@
       }
   },
   "icons": {
-    "64": "icons/icon.png"
+        "16": "icons/triangle16.png",
+        "32": "icons/triangle32.png",
+        "48": "icons/triangle48.png",
+        "128": "icons/triangle128.png"
   },
   "permissions": ["tabs"],
   "host_permissions": [
       "*://localhost/*"
   ],
   "action": {
-    "default_icon": {
-      "64": "icons/icon.png"
-    },
-    "default_title": "nvgs"
-  },
-  "page_action": {
-    "default_icon": {
-      "64": "icons/icon.png"
-    },
-    "default_popup": "pageAction/index.html",
-    "default_title": "nvgs"
+    "default_icon": "icons/triangle_grey.svg",
+    "default_title": "add site"
   },
   "background": {
       "scripts": ["background.js"]

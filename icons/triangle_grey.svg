@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="35.777065mm"
+   height="31.11161mm"
+   viewBox="0 0 35.777065 31.11161"
+   version="1.1"
+   id="svg5"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     showguides="true">
+    <sodipodi:guide
+       position="84.611605,65.405804"
+       orientation="0,-1"
+       id="guide1792"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="78.680627,34.751413"
+       orientation="0,-1"
+       id="guide1794"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-18.327656,-81.668203)">
+    <path
+       sodipodi:type="star"
+       style="fill:#00ffff;fill-opacity:0;stroke:#838383;stroke-width:19.1743;stroke-dasharray:none;stroke-opacity:1"
+       id="path1682-3"
+       inkscape:flatsided="false"
+       sodipodi:sides="3"
+       sodipodi:cx="40.808662"
+       sodipodi:cy="169.57912"
+       sodipodi:r1="79.844017"
+       sodipodi:r2="39.922012"
+       sodipodi:arg1="-1.5636542"
+       sodipodi:arg2="-0.51645663"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 41.378914,89.737136 34.144907,60.128414 34.144899,60.12841 -69.145184,-0.49385 -69.145183,-0.49385 35.0002776,-59.63457 z"
+       inkscape:transform-center-x="0.059481148"
+       inkscape:transform-center-y="-4.1124907"
+       transform="matrix(0.20861217,0,0,0.20861217,27.776771,66.947838)"
+       inkscape:export-filename="triangle128.png"
+       inkscape:export-xdpi="90.873825"
+       inkscape:export-ydpi="90.873825" />
+  </g>
+</svg>
