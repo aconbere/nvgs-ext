@@ -1,3 +1,15 @@
+// Store the username and password being used
+// will get updated by the storage onChange handler
+let NvgsState = {
+    endpoint: null,
+    username: null,
+    password: null,
+};
+
+let validCredentials = (creds) => {
+    return creds.endpoint !== null && creds.username !== null && creds.password !== null;
+}
+
 let ADD_TITLE = "add site";
 let REMOVE_TITLE = "remove site";
 
@@ -32,19 +44,24 @@ let isTriangle = async (tabId) => {
 }
 
 
-let isOk = (statusCode) => {
-    if (statusCode >= 200 && statusCode < 300) {
+let isOk = (response) => {
+    if (response && response.status >= 200 && response.status < 300) {
         return true;
     }
     return false;
 }
 
 let addCrawl = async (url) => {
+    if (!validCredentials(NvgsState)) {
+        return
+    }
     console.log(`adding: ${url}`);
-    return await fetch("http://localhost:3000/crawls", {
+    return await fetch(`${NvgsState.endpoint}/crawls`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            "Nvgs-Username": NvgsState.username,
+            "Nvgs-Password": NvgsState.password,
         },
         body: JSON.stringify({
             urls: [ url ]
@@ -54,11 +71,16 @@ let addCrawl = async (url) => {
 }; 
 
 let removeCrawl = async (url) => {
+    if (!validCredentials(NvgsState)) {
+        return
+    }
     console.log(`removing: ${url}`);
-    return await fetch("http://localhost:3000/crawls/delete", {
+    return await fetch(`${NvgsState.endpoint}/crawls/delete`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            "Nvgs-Username": NvgsState.username,
+            "Nvgs-Password": NvgsState.password,
         },
         body: JSON.stringify({
             url:  url
@@ -72,18 +94,23 @@ let removeCrawl = async (url) => {
  *   }
  */
 let getCrawl = async (url) => {
+    if (!validCredentials(NvgsState)) {
+        return
+    }
     console.log(`fetching: ${url}`);
-    let response = await fetch("http://localhost:3000/crawls/get", {
+    let response = await fetch(`${NvgsState.endpoint}/crawls/get`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            "Nvgs-Username": NvgsState.username,
+            "Nvgs-Password": NvgsState.password,
         },
         body: JSON.stringify({
             url: url
         }),
     });
 
-    if (!isOk(response.status)) {
+    if (!isOk(response)) {
         return null;
     }
 
@@ -92,6 +119,7 @@ let getCrawl = async (url) => {
 
 
 let onClick = () => {
+    console.log("state", NvgsState);
     browser.tabs
         .query({currentWindow: true, active: true})
         .then(async (tabs) => {
@@ -101,13 +129,13 @@ let onClick = () => {
             if (await isTriangle(tabId)) {
                 let response = await addCrawl(url);
 
-                if (isOk(response.status)) {
+                if (isOk(response)) {
                     await setCircleState(tabId);
                 }
             } else {
                 let response = await removeCrawl(url);
 
-                if (isOk(response.status)) {
+                if (isOk(response)) {
                     await setTriangleState(tabId);
                 }
             }
@@ -119,7 +147,7 @@ let onTabUpdated = async (tabId, changeInfo, tab) => {
         return;
     }
 
-    let url = tab["url"];
+    let url = tab["url"]
 
     if (url.startsWith("about:")) {
         await browser.action.disable();
@@ -135,9 +163,17 @@ let onTabUpdated = async (tabId, changeInfo, tab) => {
     await setCircleState(tabId);
 };
 
-//let onStartup = (e) => {
-//};
-//
-//browser.runtime.onStartup(onStartup);
+let fetchCredentials = async () => {
+    console.log("fetching credentials");
+    let credentials = await browser.storage.local.get(["username", "password", "endpoint"]);
+    NvgsState.endpoint = credentials.endpoint;
+    NvgsState.username = credentials.username;
+    NvgsState.password = credentials.password;
+    console.log("fetched credentials", credentials);
+};
+
+
 browser.action.onClicked.addListener(onClick);
 browser.tabs.onUpdated.addListener(onTabUpdated, { properties: ["status"] });
+browser.runtime.onStartup.addListener(fetchCredentials);
+browser.storage.onChanged.addListener(fetchCredentials);

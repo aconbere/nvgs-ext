@@ -14,9 +14,10 @@
         "48": "icons/triangle48.png",
         "128": "icons/triangle128.png"
   },
-  "permissions": ["tabs"],
+  "permissions": ["tabs", "storage"],
   "host_permissions": [
-      "*://localhost/*"
+      "*://localhost/*",
+      "https://nvgs.xyz/*"
   ],
   "action": {
     "default_icon": "icons/triangle_grey.svg",
