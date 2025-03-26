@@ -119,7 +119,6 @@ let getCrawl = async (url) => {
 
 
 let onClick = () => {
-    console.log("state", NvgsState);
     browser.tabs
         .query({currentWindow: true, active: true})
         .then(async (tabs) => {
@@ -148,11 +147,6 @@ let onTabUpdated = async (tabId, changeInfo, tab) => {
     }
 
     let url = tab["url"]
-
-    if (url.startsWith("about:")) {
-        await browser.action.disable();
-        return;
-    }
 
     let crawl = await getCrawl(url);
 
