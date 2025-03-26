@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "nvgs",
   "description": "Submit sites to the nvgs index",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "browser_specific_settings": {
       "gecko": {
         "id": "nvgs@conbere.corg"
